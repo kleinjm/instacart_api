@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SearchResult < OpenStruct
+class Item < OpenStruct
   def price
     pricing["price"].delete("$").to_f
   end

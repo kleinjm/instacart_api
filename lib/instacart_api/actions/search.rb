@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../models/search_result"
+require_relative "../models/item"
 
 class Client
   def search(term:, store: default_store)
@@ -14,7 +14,7 @@ class Client
 
   def parse_search_response(response:)
     items_json(response: response).map do |item_json|
-      SearchResult.new(item_json)
+      Item.new(item_json)
     end
   end
 
