@@ -3,7 +3,7 @@
 class Client
   def add_item_to_cart(item:, quantity:)
     response = put(
-      url: "v3/carts/669807/update_items",
+      url: "v3/carts/#{cart_id}/update_items",
       payload: {
         "items" => [
           {
@@ -67,5 +67,12 @@ class Client
         "request_timestamp" => 1568747533628
       }
     )
+  end
+
+  private
+
+  def cart_id
+    @cart_id ||=
+      JSON.parse(login_response.body).dig("data", "bootstrap_cart", "id")
   end
 end

@@ -42,16 +42,19 @@ class Client
 
   def session_token
     @session_token ||=
-      login.fetch("set-cookie")[/#{COOKIE_SESSION_NAME}=(.*?);/m, 1]
+      login_response.fetch("set-cookie")[/#{COOKIE_SESSION_NAME}=(.*?);/m, 1]
   end
 
-  def login
+  def login_response
+    return @login_response if defined?(@login_response)
+
     uri = URI.parse("#{BASE_DOMAIN}/accounts/login")
     request = Net::HTTP::Post.new(uri)
 
     request.body = JSON.dump(user: { email: email, password: password })
 
-    perform_request(uri: uri, request: request, with_auth: false)
+    @login_response =
+      perform_request(uri: uri, request: request, with_auth: false)
   end
 
   def perform_request(uri:, request:, with_auth: true)
