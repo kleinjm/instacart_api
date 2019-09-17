@@ -4,9 +4,7 @@ require "net/http"
 require "uri"
 require "json"
 
-Dir[File.join(__dir__, "lib", "instacart_api", "actions", "*.rb")].each do |f|
-  require_relative f
-end
+Dir["./lib/instacart_api/actions/*.rb"].each { |file| require file }
 
 class Client
   BASE_DOMAIN = "https://www.instacart.com"
