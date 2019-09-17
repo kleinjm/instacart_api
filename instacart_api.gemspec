@@ -10,9 +10,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["James Klein"]
   spec.email         = ["kleinjm007@gmail.com"]
 
-  spec.summary       = %q{Ruby wrapper to instacart API}
-  spec.description   = %q{Ruby wrapper to instacart API}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A Ruby wrapper for Instacart's API}
+  spec.description   = %q{A Ruby wrapper for Instacart's API}
+  spec.homepage      = "https://github.com/kleinjm/instacart_api"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
+    spec.metadata["source_code_uri"] = "https://github.com/kleinjm/instacart_api"
     spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
