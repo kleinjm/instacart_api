@@ -8,7 +8,3 @@ ruby File.read("./.ruby-version").strip
 
 # Specify your gem's dependencies in instacart_api.gemspec
 gemspec
-
-group :development do
-  gem "jcop", "~> 0.3.0", git: "https://github.com/kleinjm/jcop"
-end

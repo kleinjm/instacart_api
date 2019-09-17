@@ -1,3 +1,32 @@
-inherit_gem:
-  jcop:
-    - .rubocop.yml
+Metrics/LineLength:
+  Max: 80
+
+Style/Documentation:
+  Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+  Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: true
+  Enabled: true
+
+Style/LambdaCall:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.4
+
+Rails:
+  Enabled: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  EnforcedStyle: percent
