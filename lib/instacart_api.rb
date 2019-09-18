@@ -11,8 +11,8 @@ module InstacartApi
   class Error < StandardError; end
 
   class Client
-    include AddItemToCart
-    include Search
+    include InstacartApi::AddItemToCart
+    include InstacartApi::Search
 
     BASE_DOMAIN = "https://www.instacart.com"
     REQ_OPTIONS = { use_ssl: true }.freeze
