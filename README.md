@@ -20,22 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Check out [example_usage.rb](https://github.com/kleinjm/instacart_api/blob/master/example_usage.rb) or see full example below.
-
-```rb
-require_relative "lib/instacart_api/client.rb"
-
-client = Client.new(
-  email: "jsmith@gmail.com",
-  password: "my_password",
-  default_store: "fairway-market"
-)
-
-bananas = client.search(term: "banana")
-# => Array of Items
-
-client.add_item_to_cart(item_id: bananas.first.id, quantity: 1)
-```
+Check out [example_usage.rb](https://github.com/kleinjm/instacart_api/blob/master/example_usage.rb).
 
 ## Development
 

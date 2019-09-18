@@ -2,7 +2,7 @@
 
 require_relative "../models/item"
 
-class Client
+class InstacartClient
   def search(term:, store: default_store)
     term_query = URI.encode(term)
     response = get(url: "v3/containers/#{store}/search_v3/#{term_query}?per=40")

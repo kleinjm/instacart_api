@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Client
+class InstacartClient
   def add_item_to_cart(item_id:, quantity:)
     put(
       url: "v3/carts/#{cart_id}/update_items",

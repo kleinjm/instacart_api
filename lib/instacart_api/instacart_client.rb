@@ -6,7 +6,7 @@ require "json"
 
 Dir["./lib/instacart_api/actions/*.rb"].each { |file| require file }
 
-class Client
+class InstacartClient
   BASE_DOMAIN = "https://www.instacart.com"
   REQ_OPTIONS = { use_ssl: true }.freeze
   COOKIE_SESSION_NAME = "_instacart_session"
