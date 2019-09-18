@@ -5,14 +5,15 @@ require "json"
 require "net/http"
 require "uri"
 
-Dir["./lib/instacart_api/actions/*.rb"].each { |file| require file }
+require_relative "./instacart_api/actions/add_item_to_cart.rb"
+require_relative "./instacart_api/actions/search.rb"
 
 module InstacartApi
   class Error < StandardError; end
 
   class Client
-    include InstacartApi::AddItemToCart
-    include InstacartApi::Search
+    include AddItemToCart
+    include Search
 
     BASE_DOMAIN = "https://www.instacart.com"
     REQ_OPTIONS = { use_ssl: true }.freeze

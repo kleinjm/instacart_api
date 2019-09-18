@@ -10,4 +10,4 @@ client = InstacartApi::Client.new(
 
 bananas = client.search(term: "banana")
 
-# client.add_item_to_cart(item_id: bananas.first.id, quantity: 1)
+client.add_item_to_cart(item_id: bananas.first.id, quantity: 1)
