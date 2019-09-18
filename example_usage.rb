@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "lib/instacart_api/instacart_client.rb"
+require_relative "lib/instacart_api.rb"
 
-client = InstacartClient.new(
+client = InstacartApi::Client.new(
   email: ENV.fetch("INSTA_EMAIL"),
   password: ENV.fetch("INSTA_PASSWORD"),
   default_store: "fairway-market"

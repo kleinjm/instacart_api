@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "instacart_api/version"
+require "json"
 require "net/http"
 require "uri"
 
@@ -10,6 +11,9 @@ module InstacartApi
   class Error < StandardError; end
 
   class Client
+    include AddItemToCart
+    include Search
+
     BASE_DOMAIN = "https://www.instacart.com"
     REQ_OPTIONS = { use_ssl: true }.freeze
     COOKIE_SESSION_NAME = "_instacart_session"

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "ostruct"
+
 class Item < OpenStruct
   def price
     pricing["price"].delete("$").to_f
