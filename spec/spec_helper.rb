@@ -1,5 +1,11 @@
+# frozen_string_literal: true
+
+require "simplecov"
+SimpleCov.start
+
 require "bundler/setup"
 require "instacart_api"
+require "webmock/rspec"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

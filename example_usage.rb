@@ -8,6 +8,8 @@ client = InstacartApi::Client.new(
   default_store: "fairway-market"
 )
 
+# stores = client.available_stores
+
 bananas = client.search(term: "banana")
 # => Array of searh result Items
 
