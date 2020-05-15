@@ -46,26 +46,14 @@ module InstacartApi
       perform_request(uri: uri, request: request)
     end
 
+    def cart_id
+      @cart_id ||=
+        JSON.parse(login_response.body).dig("data", "bootstrap_cart", "id")
+    end
+
     private
 
     attr_reader :email, :password, :default_store
-
-    def session_token
-      @session_token ||=
-        login_response.fetch("set-cookie")[/#{COOKIE_SESSION_NAME}=(.*?);/m, 1]
-    end
-
-    def login_response
-      return @login_response if defined?(@login_response)
-
-      uri = URI.parse("#{BASE_DOMAIN}/accounts/login")
-      request = Net::HTTP::Post.new(uri)
-
-      request.body = JSON.dump(user: { email: email, password: password })
-
-      @login_response =
-        perform_request(uri: uri, request: request, with_auth: false)
-    end
 
     def perform_request(uri:, request:, with_auth: true)
       configure_request(request: request, with_auth: with_auth)
@@ -89,6 +77,23 @@ module InstacartApi
 
     def session_cookie
       "#{COOKIE_SESSION_NAME}=#{session_token}"
+    end
+
+    def session_token
+      @session_token ||=
+        login_response.fetch("set-cookie")[/#{COOKIE_SESSION_NAME}=(.*?);/m, 1]
+    end
+
+    def login_response
+      return @login_response if defined?(@login_response)
+
+      uri = URI.parse("#{BASE_DOMAIN}/accounts/login")
+      request = Net::HTTP::Post.new(uri)
+
+      request.body = JSON.dump(user: { email: email, password: password })
+
+      @login_response =
+        perform_request(uri: uri, request: request, with_auth: false)
     end
   end
 end

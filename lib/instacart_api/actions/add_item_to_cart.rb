@@ -17,12 +17,5 @@ module InstacartApi
         payload: { "items" => items }
       )
     end
-
-    private
-
-    def cart_id
-      @cart_id ||=
-        JSON.parse(login_response.body).dig("data", "bootstrap_cart", "id")
-    end
   end
 end
