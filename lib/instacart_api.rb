@@ -13,6 +13,8 @@ module InstacartApi
   class Error < StandardError; end
 
   class Client
+    class ResponseError < StandardError; end
+
     include AddItemToCart
     include AvailableStores
 
@@ -20,6 +22,7 @@ module InstacartApi
     REQ_OPTIONS = { use_ssl: true }.freeze
     COOKIE_SESSION_NAME = "_instacart_session"
 
+    # TODO: remove default_store
     def initialize(email:, password:, default_store:)
       @email = email
       @password = password
@@ -47,8 +50,6 @@ module InstacartApi
 
     attr_reader :email, :password, :default_store
 
-    class ResponseError < StandardError; end
-
     def session_token
       @session_token ||=
         login_response.fetch("set-cookie")[/#{COOKIE_SESSION_NAME}=(.*?);/m, 1]
@@ -72,9 +73,7 @@ module InstacartApi
         http.request(request)
       end
 
-      unless response.code.match?("200")
-        raise ResponseError, JSON.parse(response.body)
-      end
+      raise ResponseError unless response.code.match?("200")
 
       response
     end
