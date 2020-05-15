@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe InstacartApi::AddItemToCart do
+RSpec.describe InstacartApi::Client::AddItemToCart do
   describe "#add_item_to_cart" do
     it "performs the PUT request" do
       stub_login
       stub_add_item
 
       client = InstacartApi::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil)
+        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
 
       response = client.add_item_to_cart(item_id: 123, quantity: 1)
 
@@ -21,7 +21,7 @@ RSpec.describe InstacartApi::AddItemToCart do
       stub_add_item
 
       client = InstacartApi::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil)
+        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
 
       response = client.add_items_to_cart(items: [{ item_id: 123, quantity: 1 }])
 

@@ -5,40 +5,56 @@ RSpec.describe InstacartApi do
     expect(InstacartApi::VERSION).not_to be nil
   end
 
-  it "can GET request the give URL" do
-    stub_login
-    stub_search
+  describe "#login" do
+    it "performs the login request and returns an instance of self" do
+      stub_login
 
-    client = described_class::Client.
-      new(email: "test@gmail.com", password: "testing1", default_store: nil)
+      client = described_class::Client.
+        new(email: "test@gmail.com", password: "testing1", default_store: nil)
 
-    response = client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=0")
-
-    expect(response.code).to eq("200")
+      expect(client.login).to be_an_instance_of(InstacartApi::Client)
+      expect(WebMock).to have_requested(:post, "https://www.instacart.com/accounts/login")
+    end
   end
 
-  it "can PUT request the give URL" do
-    stub_login
-    stub_add_item
+  describe "#get" do
+    it "can GET request the give URL" do
+      stub_login
+      stub_search
 
-    client = described_class::Client.
-      new(email: "test@gmail.com", password: "testing1", default_store: nil)
+      client = described_class::Client.
+        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
 
-    response = client.put(url: "v3/carts/123/update_items", payload: { "items" => [] })
+      response = client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=0")
 
-    expect(response.code).to eq("200")
+      expect(response.code).to eq("200")
+    end
+
+    it "handles failed responses" do
+      stub_login
+      stub_search_failure
+
+      client = described_class::Client.
+        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
+
+      expect do
+        client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=0")
+      end.to raise_error(InstacartApi::Client::ResponseError)
+    end
   end
 
-  it "handles failed responses" do
-    stub_login
-    stub_search_failure
+  describe "#put" do
+    it "can PUT request the give URL" do
+      stub_login
+      stub_add_item
 
-    client = described_class::Client.
-      new(email: "test@gmail.com", password: "testing1", default_store: nil)
+      client = described_class::Client.
+        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
 
-    expect do
-      client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=0")
-    end.to raise_error(InstacartApi::Client::ResponseError)
+      response = client.put(url: "v3/carts/123/update_items", payload: { "items" => [] })
+
+      expect(response.code).to eq("200")
+    end
   end
 
   def stub_login

@@ -6,7 +6,6 @@ require "net/http"
 require "uri"
 
 require "instacart_api/actions/add_item_to_cart"
-require "instacart_api/actions/available_stores"
 require "instacart_api/actions/search"
 
 module InstacartApi
@@ -14,9 +13,7 @@ module InstacartApi
 
   class Client
     class ResponseError < StandardError; end
-
     include AddItemToCart
-    include AvailableStores
 
     BASE_DOMAIN = "https://www.instacart.com"
     REQ_OPTIONS = { use_ssl: true }.freeze
@@ -27,6 +24,16 @@ module InstacartApi
       @email = email
       @password = password
       @default_store = default_store
+    end
+
+    def login
+      response = login_response
+
+      session_token = response.fetch("set-cookie")[/#{COOKIE_SESSION_NAME}=(.*?);/m, 1]
+      @session_cookie = "#{COOKIE_SESSION_NAME}=#{session_token}"
+      @cart_id = JSON.parse(response.body).dig("data", "bootstrap_cart", "id")
+
+      self
     end
 
     def get(url:)
@@ -46,14 +53,9 @@ module InstacartApi
       perform_request(uri: uri, request: request)
     end
 
-    def cart_id
-      @cart_id ||=
-        JSON.parse(login_response.body).dig("data", "bootstrap_cart", "id")
-    end
-
     private
 
-    attr_reader :email, :password, :default_store
+    attr_reader :email, :password, :default_store, :session_cookie, :cart_id
 
     def perform_request(uri:, request:, with_auth: true)
       configure_request(request: request, with_auth: with_auth)
@@ -75,25 +77,13 @@ module InstacartApi
       request["Cookie"] = session_cookie if with_auth
     end
 
-    def session_cookie
-      "#{COOKIE_SESSION_NAME}=#{session_token}"
-    end
-
-    def session_token
-      @session_token ||=
-        login_response.fetch("set-cookie")[/#{COOKIE_SESSION_NAME}=(.*?);/m, 1]
-    end
-
     def login_response
-      return @login_response if defined?(@login_response)
-
       uri = URI.parse("#{BASE_DOMAIN}/accounts/login")
       request = Net::HTTP::Post.new(uri)
 
       request.body = JSON.dump(user: { email: email, password: password })
 
-      @login_response =
-        perform_request(uri: uri, request: request, with_auth: false)
+      perform_request(uri: uri, request: request, with_auth: false)
     end
   end
 end
