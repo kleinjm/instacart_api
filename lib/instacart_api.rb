@@ -16,6 +16,7 @@ module InstacartApi
     class ResponseError < StandardError; end
     include AddItemToCart
     include Login
+    include Search
 
     BASE_DOMAIN = "https://www.instacart.com"
     REQ_OPTIONS = { use_ssl: true }.freeze

@@ -25,7 +25,7 @@ RSpec.describe InstacartApi do
       client = described_class::Client.
         new(email: "test@gmail.com", password: "testing1", default_store: nil).login
 
-      response = client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=0")
+      response = client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=1")
 
       expect(response.code).to eq("200")
     end
@@ -38,7 +38,7 @@ RSpec.describe InstacartApi do
         new(email: "test@gmail.com", password: "testing1", default_store: nil).login
 
       expect do
-        client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=0")
+        client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=1")
       end.to raise_error(InstacartApi::Client::ResponseError)
     end
   end
@@ -57,18 +57,13 @@ RSpec.describe InstacartApi do
     end
   end
 
-  def stub_search
-    stub_request(:get, "https://www.instacart.com/v3/containers/fairway/search_v3/grapes?page=0&per=40").
-      to_return(status: 200, body: "", headers: {})
-  end
-
   def stub_add_item
     stub_request(:put, "https://www.instacart.com/v3/carts/123/update_items").
       to_return(status: 200, body: "", headers: {})
   end
 
   def stub_search_failure
-    stub_request(:get, "https://www.instacart.com/v3/containers/fairway/search_v3/grapes?page=0&per=40").
+    stub_request(:get, "https://www.instacart.com/v3/containers/fairway/search_v3/grapes?page=1&per=40").
       to_return(status: 500, body: "", headers: {})
   end
 end
