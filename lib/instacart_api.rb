@@ -7,13 +7,11 @@ require "uri"
 
 require "instacart_api/client/add_item_to_cart"
 require "instacart_api/client/login"
+require "instacart_api/client/response_error"
 require "instacart_api/client/search"
 
 module InstacartApi
-  class Error < StandardError; end
-
   class Client
-    class ResponseError < StandardError; end
     include AddItemToCart
     include Login
     include Search
