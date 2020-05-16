@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# run this file with `ruby -I lib example_usage.rb`
 require "instacart_api"
 
 client = InstacartApi::Client.new(
@@ -8,7 +9,7 @@ client = InstacartApi::Client.new(
   default_store: "fairway-market"
 ).login
 
-stores = client.available_stores
+# stores = client.available_stores
 
 # bananas = client.search(term: "banana")
 # => Array of searh result Items

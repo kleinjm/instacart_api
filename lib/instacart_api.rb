@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require "instacart_api/version"
 require "json"
 require "net/http"
 require "uri"
 
 require "instacart_api/client/add_item_to_cart"
+require "instacart_api/client/item_search"
 require "instacart_api/client/login"
 require "instacart_api/client/response_error"
-require "instacart_api/client/item_search"
 require "instacart_api/client/stores"
+require "instacart_api/version"
 
 module InstacartApi
   class Client
