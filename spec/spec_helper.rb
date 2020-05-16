@@ -7,6 +7,9 @@ require "bundler/setup"
 require "instacart_api"
 require "webmock/rspec"
 
+root = File.dirname __dir__
+Dir[File.join(root, "spec", "support", "**", "*.rb")].sort.each { |f| require f }
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"

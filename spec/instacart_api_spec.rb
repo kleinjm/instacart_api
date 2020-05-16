@@ -57,14 +57,6 @@ RSpec.describe InstacartApi do
     end
   end
 
-  def stub_login
-    body = File.read("spec/artifacts/successful_login_response_body.txt")
-    cookie = File.read("spec/artifacts/successful_login_response_cookie.txt").strip
-
-    stub_request(:post, "https://www.instacart.com/accounts/login").
-      to_return(status: 200, body: body, headers: { "set-cookie" => cookie })
-  end
-
   def stub_search
     stub_request(:get, "https://www.instacart.com/v3/containers/fairway/search_v3/grapes?page=0&per=40").
       to_return(status: 200, body: "", headers: {})
