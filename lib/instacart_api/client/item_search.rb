@@ -4,7 +4,7 @@ require_relative "../models/item"
 
 module InstacartApi
   class Client
-    module Search
+    module ItemSearch
       def search(term:, store: default_store)
         @term_query = URI.encode(term)
         @store = store

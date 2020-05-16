@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe InstacartApi::Client::Search do
+RSpec.describe InstacartApi::Client::ItemSearch do
   describe "#search" do
     it "performs the search request" do
       stub_login

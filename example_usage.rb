@@ -8,9 +8,9 @@ client = InstacartApi::Client.new(
   default_store: "fairway-market"
 ).login
 
-# stores = client.available_stores
+stores = client.available_stores
 
-bananas = client.search(term: "banana")
+# bananas = client.search(term: "banana")
 # => Array of searh result Items
 
 # sorting will compare items by price

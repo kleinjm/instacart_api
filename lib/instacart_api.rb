@@ -8,13 +8,14 @@ require "uri"
 require "instacart_api/client/add_item_to_cart"
 require "instacart_api/client/login"
 require "instacart_api/client/response_error"
-require "instacart_api/client/search"
+require "instacart_api/client/item_search"
+require "instacart_api/client/stores"
 
 module InstacartApi
   class Client
     include AddItemToCart
     include Login
-    include Search
+    include ItemSearch
 
     BASE_DOMAIN = "https://www.instacart.com"
     REQ_OPTIONS = { use_ssl: true }.freeze
