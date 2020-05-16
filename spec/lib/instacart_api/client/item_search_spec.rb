@@ -7,7 +7,8 @@ RSpec.describe InstacartApi::Client::ItemSearch do
       stub_search(term: "grapes")
 
       client = InstacartApi::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: "fairway").login
+        new(email: "test@gmail.com", password: "testing1").login
+      client.default_store = "fairway"
 
       items = client.search(term: "grapes")
 

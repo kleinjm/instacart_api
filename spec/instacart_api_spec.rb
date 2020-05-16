@@ -10,7 +10,7 @@ RSpec.describe InstacartApi do
       stub_login
 
       client = described_class::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil)
+        new(email: "test@gmail.com", password: "testing1")
 
       expect(client.login).to be_an_instance_of(InstacartApi::Client)
       expect(WebMock).to have_requested(:post, "https://www.instacart.com/accounts/login")
@@ -23,7 +23,7 @@ RSpec.describe InstacartApi do
       stub_search
 
       client = described_class::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
+        new(email: "test@gmail.com", password: "testing1").login
 
       response = client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=1")
 
@@ -35,7 +35,7 @@ RSpec.describe InstacartApi do
       stub_search_failure
 
       client = described_class::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
+        new(email: "test@gmail.com", password: "testing1").login
 
       expect do
         client.get(url: "v3/containers/fairway/search_v3/grapes?per=40&page=1")
@@ -49,7 +49,7 @@ RSpec.describe InstacartApi do
       stub_add_item
 
       client = described_class::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
+        new(email: "test@gmail.com", password: "testing1").login
 
       response = client.put(url: "v3/carts/123/update_items", payload: { "items" => [] })
 

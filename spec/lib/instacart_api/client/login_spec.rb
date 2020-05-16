@@ -6,7 +6,7 @@ RSpec.describe InstacartApi::Client::Login do
       stub_login
 
       client = InstacartApi::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil)
+        new(email: "test@gmail.com", password: "testing1")
 
       expect(client.login).to be_an_instance_of(InstacartApi::Client)
       expect(client.instance_variable_get(:@session_cookie)).to_not be_nil

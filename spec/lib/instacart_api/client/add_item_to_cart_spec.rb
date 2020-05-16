@@ -7,7 +7,7 @@ RSpec.describe InstacartApi::Client::AddItemToCart do
       stub_add_item
 
       client = InstacartApi::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
+        new(email: "test@gmail.com", password: "testing1").login
 
       response = client.add_item_to_cart(item_id: 123, quantity: 1)
 
@@ -21,7 +21,7 @@ RSpec.describe InstacartApi::Client::AddItemToCart do
       stub_add_item
 
       client = InstacartApi::Client.
-        new(email: "test@gmail.com", password: "testing1", default_store: nil).login
+        new(email: "test@gmail.com", password: "testing1").login
 
       response = client.add_items_to_cart(items: [{ item_id: 123, quantity: 1 }])
 

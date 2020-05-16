@@ -14,17 +14,18 @@ require "instacart_api/version"
 module InstacartApi
   class Client
     include AddItemToCart
-    include Login
     include ItemSearch
+    include Login
+    include Stores
+
+    attr_accessor :default_store
 
     BASE_DOMAIN = "https://www.instacart.com"
     REQ_OPTIONS = { use_ssl: true }.freeze
 
-    # TODO: remove default_store
-    def initialize(email:, password:, default_store:)
+    def initialize(email:, password:)
       @email = email
       @password = password
-      @default_store = default_store
     end
 
     def get(url:)
@@ -48,7 +49,6 @@ module InstacartApi
 
     attr_reader(
       :cart_id,
-      :default_store,
       :email,
       :password,
       :session_cookie

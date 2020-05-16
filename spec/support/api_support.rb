@@ -14,6 +14,12 @@ module ApiSupport
       to_return(status: 200, body: search_json_body, headers: {})
   end
 
+  def instantiate_client
+    stub_login
+
+    InstacartApi::Client.new(email: "test@gmail.com", password: "testing1").login
+  end
+
   private
 
   def search_json_body
