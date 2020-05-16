@@ -5,9 +5,9 @@ require "json"
 require "net/http"
 require "uri"
 
-require "instacart_api/actions/add_item_to_cart"
-require "instacart_api/actions/login"
-require "instacart_api/actions/search"
+require "instacart_api/client/add_item_to_cart"
+require "instacart_api/client/login"
+require "instacart_api/client/search"
 
 module InstacartApi
   class Error < StandardError; end
