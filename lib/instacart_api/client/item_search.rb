@@ -6,7 +6,7 @@ module InstacartApi
   class Client
     module ItemSearch
       def search(term:, store: default_store)
-        @term_query = URI.encode(term)
+        @term_query = URI.encode_www_form_component(term)
         @store = store
         @items = []
         @page = 1

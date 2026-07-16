@@ -1,5 +1,7 @@
 # Instacart Api
 
+[![CI](https://github.com/kleinjm/instacart_api/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kleinjm/instacart_api/actions/workflows/ci.yml)
+
 Ruby interface to Instacart used for programmatic grocery delivery.
 
 ## Installation

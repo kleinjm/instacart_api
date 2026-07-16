@@ -1,4 +1,9 @@
-Metrics/LineLength:
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: disable
+  SuggestExtensions: false
+
+Layout/LineLength:
   Max: 80
 
 Style/Documentation:
@@ -14,15 +19,6 @@ Style/StringLiterals:
   Enabled: true
 
 Style/LambdaCall:
-  Enabled: false
-
-AllCops:
-  TargetRubyVersion: 2.4
-
-Rails:
-  Enabled: true
-
-Rails/HasAndBelongsToMany:
   Enabled: false
 
 Style/SymbolArray:

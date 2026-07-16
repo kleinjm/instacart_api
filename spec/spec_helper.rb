@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require "simplecov"
-SimpleCov.start
+SimpleCov.start do
+  add_filter "/spec/"
+  enable_coverage :line
+  minimum_coverage line: 100
+end
 
 require "bundler/setup"
 require "instacart_api"
