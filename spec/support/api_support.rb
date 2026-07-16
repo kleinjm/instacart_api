@@ -1,30 +1,41 @@
 # frozen_string_literal: true
 
 module ApiSupport
-  def stub_login
-    body = File.read("spec/artifacts/successful_login_response_body.txt")
-    cookie = File.read("spec/artifacts/successful_login_response_cookie.txt").strip
+  GRAPHQL_URL = "https://www.instacart.com/graphql"
 
-    stub_request(:post, "https://www.instacart.com/accounts/login").
-      to_return(status: 200, body: body, headers: { "set-cookie" => cookie  })
+  def fixture(name)
+    File.read(File.join(__dir__, "..", "fixtures", "#{name}.json"))
   end
 
-  def stub_search(term: "grapes")
-    stub_request(:get, "https://www.instacart.com/v3/containers/fairway/search_v3/#{term}?page=1&per=40").
-      to_return(status: 200, body: search_json_body, headers: {})
+  # Stub a persisted GraphQL query (GET), matched by operation name.
+  def stub_query(operation, fixture_name)
+    stub_request(:get, GRAPHQL_URL).
+      with(query: hash_including("operationName" => operation)).
+      to_return(
+        status: 200,
+        body: fixture(fixture_name),
+        headers: { "Content-Type" => "application/json" }
+      )
   end
 
-  def instantiate_client
-    stub_login
-
-    InstacartApi::Client.new(email: "test@gmail.com", password: "testing1").login
+  # Stub a persisted GraphQL mutation (POST), matched by operation name.
+  def stub_mutation(operation, fixture_name)
+    stub_request(:post, GRAPHQL_URL).
+      with(body: hash_including("operationName" => operation)).
+      to_return(
+        status: 200,
+        body: fixture(fixture_name),
+        headers: { "Content-Type" => "application/json" }
+      )
   end
 
-  private
-
-  def search_json_body
-    "{\"container\":{\"modules\":[{\"id\":\"search_result_set_\", " \
-      "\"data\":{\"items\":{}, \"pagination\":{\"total_pages\":1}}}]}}"
+  def build_client(**overrides)
+    defaults = {
+      session_cookie: "__Host-instacart_sid=test-cookie",
+      postal_code: "97202",
+      zone_id: "103"
+    }
+    InstacartApi::Client.new(**defaults.merge(overrides))
   end
 end
 

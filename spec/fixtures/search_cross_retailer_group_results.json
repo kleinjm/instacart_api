@@ -1,0 +1,28 @@
+{
+  "data": {
+    "searchCrossRetailerGroupResults": {
+      "term": "eggs",
+      "searchId": "test-search-id",
+      "results": [
+        {
+          "retailerId": "200",
+          "shopId": "1292",
+          "itemIds": [
+            "items_3113-20731941",
+            "items_3113-22373938"
+          ],
+          "__typename": "SearchCrossRetailerGroupResult"
+        },
+        {
+          "retailerId": "7",
+          "shopId": "580",
+          "itemIds": [
+            "items_580-111222"
+          ],
+          "__typename": "SearchCrossRetailerGroupResult"
+        }
+      ],
+      "__typename": "SearchCrossRetailerGroupResults"
+    }
+  }
+}

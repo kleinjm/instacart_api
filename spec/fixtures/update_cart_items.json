@@ -1,0 +1,29 @@
+{
+  "data": {
+    "updateCartItems": {
+      "cart": {
+        "__typename": "CartsCart",
+        "id": "3693684252",
+        "cartType": "grocery",
+        "updatedAt": "2026-07-16T04:09:45Z",
+        "itemCount": 1,
+        "retailerId": "200",
+        "cartItemCollection": {
+          "cartItems": [
+            {
+              "id": "34540770075",
+              "quantity": 1.0,
+              "quantityType": "each",
+              "basketProduct": {
+                "id": "items_3113-22373938",
+                "productId": "22373938",
+                "__typename": "BasketProductsBasketProductItem"
+              },
+              "__typename": "CartsCartItem"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

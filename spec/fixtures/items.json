@@ -1,0 +1,51 @@
+{
+  "data": {
+    "items": [
+      {
+        "id": "items_3113-17422780",
+        "name": "Spindrift® Lemon Sparkling Water",
+        "size": "12 fl oz",
+        "productId": "17422780",
+        "brandName": "spindrift",
+        "availability": {
+          "available": true,
+          "stockLevel": "highlyInStock"
+        },
+        "quantityAttributes": {
+          "increment": 1.0,
+          "min": 1.0,
+          "max": 500.0,
+          "quantityType": "each"
+        },
+        "price": {
+          "viewSection": {
+            "priceValueString": "6.99",
+            "priceString": "$6.99",
+            "fullPriceString": "$8.99"
+          }
+        }
+      },
+      {
+        "id": "items_3113-19920241",
+        "name": "Organic Bananas",
+        "size": "1 ct",
+        "productId": "19920241",
+        "brandName": null,
+        "availability": {
+          "available": false,
+          "stockLevel": "outOfStock"
+        },
+        "quantityAttributes": {
+          "quantityType": "each"
+        },
+        "price": {
+          "viewSection": {
+            "priceValueString": "0.29",
+            "priceString": "$0.29",
+            "fullPriceString": "$0.29"
+          }
+        }
+      }
+    ]
+  }
+}

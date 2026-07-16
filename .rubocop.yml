@@ -2,9 +2,28 @@ AllCops:
   TargetRubyVersion: 3.1
   NewCops: disable
   SuggestExtensions: false
+  Exclude:
+    - "bin/**/*"
+    - "vendor/**/*"
 
 Layout/LineLength:
   Max: 80
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "*.gemspec"
+
+# GraphQL operations carry verbose variable hashes; allow roomier methods.
+Metrics/MethodLength:
+  Max: 25
+
+Metrics/AbcSize:
+  Max: 20
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
 
 Style/Documentation:
   Enabled: false

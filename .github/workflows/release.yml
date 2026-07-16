@@ -1,0 +1,36 @@
+name: Release
+
+# Publishes the gem to RubyGems whenever a version tag (e.g. v0.2.0) is pushed.
+# Uses RubyGems trusted publishing (OIDC) — no API key secret required. See
+# https://guides.rubygems.org/trusted-publishing/ and configure this repo +
+# workflow as a trusted publisher for the gem on rubygems.org first.
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+
+    permissions:
+      contents: write   # create the GitHub release
+      id-token: write   # mint the OIDC token for trusted publishing
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Verify tests pass before releasing
+        run: bundle exec rspec
+
+      - name: Publish to RubyGems
+        uses: rubygems/release-gem@v1

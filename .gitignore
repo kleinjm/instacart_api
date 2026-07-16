@@ -9,3 +9,11 @@
 
 # rspec failure tracking
 .rspec_status
+
+# built gems
+/*.gem
+
+# capture tooling (node deps + recorded traffic, which contains session data)
+/capture/node_modules/
+/capture/calls.jsonl
+/capture/package*.json
